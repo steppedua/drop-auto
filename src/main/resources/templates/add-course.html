@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Steppedua Inc.</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+<header th:insert="parts/header :: header"></header>
+
+<div class="container mt-5 mb-5">
+    <h1>Добавление курса</h1>
+    <form action="/course/add" th:action="@{/greeting}" th:object="${greeting}" method="post">
+        <input type="text" th:field="*{content}" class="form-control"/>
+        <input type="text" th:field="*{content}" class="form-control"/>
+        <button><input type="submit" value="Submit"/>Добавить курс</button>
+    </form>
+</div>
+
+<footer th:insert="parts/footer :: footer"></footer>
+</body>
+</html>
