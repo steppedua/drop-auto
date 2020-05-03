@@ -8,13 +8,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
 
     @GetMapping("/")
-    public String indexPage(Model model) {
+    public String indexPage() {
         return "index";
     }
 
-    @GetMapping("/course")
-    public String coursePage() {
-        return "course";
+
+
+
+    @GetMapping("/buy")
+    public String buyCourse() {
+        return "buy";
     }
 
 

@@ -13,7 +13,15 @@
 
 <div>
     <h1>HI BRO</h1>
+</div>
 
+<div class="container mt-5">
+    <h1>Блог сайта</h1>
+    <div th:each="el : ${courses}" class="alert alert-info mt-2">
+        <h3 th:text="${el.title}"/>
+        <p th:text="${el.anons}"/>
+        <a th:href="'/course/' + ${el.id}" class="btn btn-warning">Детальнее</a>
+    </div>
 </div>
 
 <footer th:insert="parts/footer :: footer"></footer>

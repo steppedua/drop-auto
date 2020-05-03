@@ -13,10 +13,11 @@
 
 <div class="container mt-5 mb-5">
     <h1>Добавление курса</h1>
-    <form action="/course/add" th:action="@{/greeting}" th:object="${greeting}" method="post">
-        <input type="text" th:field="*{content}" class="form-control"/>
-        <input type="text" th:field="*{content}" class="form-control"/>
-        <button><input type="submit" value="Submit"/>Добавить курс</button>
+    <form action="#" th:action="@{/course/add}" th:object="${course}" method="post">
+        <input type="text" th:field="*{title}" placeholder="введите название курса" class="form-control"/><br>
+        <input type="text" th:field="*{anons}" placeholder="введите анонс курса" class="form-control"/><br>
+        <textarea th:field="*{full_text}" placeholder="введите текст курса" class="form-control"></textarea><br>
+        <button type="submit" value="Submit" class="btn btn-success">Добавить курс</button>
     </form>
 </div>
 
