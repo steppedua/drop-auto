@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,8 +22,7 @@ public class CourseController {
 
     @GetMapping("/course")
     public String courseMain(Model model) {
-        Iterable<Courses> courses = coursesRepository.findAll();
-        model.addAttribute("courses", courses);
+        model.addAttribute("courses", coursesRepository.findAll());
         return "course";
     }
 
@@ -44,18 +42,6 @@ public class CourseController {
         return "redirect:/course";
     }
 
-//    @PostMapping("/course/{id}")
-//    public String addCourse(@PathVariable("id") Long id, Model model) {
-//        List<Courses> allById = coursesRepository.findAllById(id);
-//        Iterable<Courses> courses = coursesRepository.findAll()
-//        return "";
-//    }
 
 
-//    @GetMapping("/blog")
-//    public String blogMain(Model model) {
-//        Iterable<Post> posts = postRepository.findAll();
-//        model.addAttribute("posts", posts);
-//        return "blog-main";
-//    }
 }
