@@ -14,12 +14,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)//для разделения на админ и юзер
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private MyUserDetailsService userDetailsService;
 
+    // шифрование в 10 символов
     @Bean
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder(10);
@@ -36,6 +37,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .loginPage("/login") // страница для входа
                         .defaultSuccessUrl("/") //сюда закинет после входа
                         .permitAll() //доступно для всех
+                .and()
+                        .rememberMe() //для запомонания сессии user (вроде бы на 14 дней)
                 .and()
                         .logout()
                         .logoutUrl("/logout") // ссылка для выхода
