@@ -10,10 +10,10 @@
                 <a class="p-2 text-dark" th:href="@{/buy}">Купить подписку</a>
                 <a class="p-2 text-dark" th:href="@{/course/add}">Добавить курс</a>
 
-                    <form class="form-inline my-2 my-lg-0">
-                        <a class="btn btn-outline-success my-2 my-sm-0" th:href="@{/login}">Login</a>
-                        <a class="btn btn-outline-success my-2 my-sm-0" href="#">Logout</a>
-                        <a class="btn btn-outline-success my-2 my-sm-0" th:href="@{/registration}">Register</a>
+                    <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+                        <a sec:authorize="!isAuthenticated()" class="btn btn-outline-success my-2 my-sm-0" th:href="@{/login}">Вход</a>
+                        <button sec:authorize="isAuthenticated()" class="btn btn-outline-success my-2 my-sm-0">Выход</button>
+                        <a sec:authorize="!isAuthenticated()" class="btn btn-outline-success my-2 my-sm-0" th:href="@{/registration}">Регистрация</a>
                     </form>
             </nav>
         </div>
