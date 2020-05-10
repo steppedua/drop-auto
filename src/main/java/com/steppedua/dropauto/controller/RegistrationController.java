@@ -1,34 +1,53 @@
 package com.steppedua.dropauto.controller;
 
-import com.steppedua.dropauto.domain.RegistrationForm;
-import com.steppedua.dropauto.repository.UserRepository;
+
+import com.steppedua.dropauto.domain.User;
+import com.steppedua.dropauto.servise.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/registration")
 public class RegistrationController {
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final UserService userService;
 
     @Autowired
-    private UserRepository userRepository;
+    public RegistrationController(UserService userService) {
+        this.userService = userService;
+    }
 
-    @GetMapping
-    public String registration(){
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login";
+    }
+
+    @GetMapping("/registration")
+    public String registrationPage(Model model) {
+        model.addAttribute("user", new User());
         return "registration";
     }
 
-    @PostMapping
-    public String processUser(RegistrationForm form){
-        //сохраняем зашифрованный пароль user
-        userRepository.save(form.toUser(passwordEncoder));
+    @PostMapping("/registration")
+    public String registrationNewUser(@ModelAttribute("user") @Valid User user, BindingResult result, Model model) {
 
+        if (result.hasErrors()) {
+            return "registration";
+        }
+
+        if (!user.getPassword().equals(user.getMatchingPassword())) {
+            //кидаем свою ошибку, если password не совпадает по полю "password"
+            result.rejectValue("password", "", "Password not matching");
+            return "registration";
+        }
+
+        userService.create(user);
         return "redirect:/login";
     }
 }
