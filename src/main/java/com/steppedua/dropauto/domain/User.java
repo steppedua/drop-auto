@@ -27,6 +27,6 @@ public class User {
 
     @NotEmpty
     @NotNull
-//    @Transient
+    @Transient
     private String matchingPassword;
 }

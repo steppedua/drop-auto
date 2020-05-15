@@ -24,7 +24,7 @@ public class UserService {
 
 
     public void create(User user) {
-        Optional<User> user1 = userRepository.findByUsername(user.getUsername());
+        userRepository.findByUsername(user.getUsername());
         //шифрование пароля
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
